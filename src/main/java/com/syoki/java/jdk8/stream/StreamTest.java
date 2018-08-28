@@ -2,6 +2,7 @@ package com.syoki.java.jdk8.stream;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StreamTest {
@@ -17,6 +18,8 @@ public class StreamTest {
             new Dish("prawns", false, 300, Dish.Type.FISH),
             new Dish("salmon", false, 450, Dish.Type.FISH));
 
+    private static List<String> words = Arrays.asList("Java 8", "Lambdas", "In", "Action");
+
 
     public static void main(String[] args) {
         List<String> threeHighCaloricDishNames =
@@ -27,6 +30,30 @@ public class StreamTest {
                 .collect(Collectors.toList());
 
         System.out.println(threeHighCaloricDishNames);
+
+
+        List<Integer> dishNameLengths = menu.stream()
+                .map(Dish::getName)
+                .map(String::length)
+                .collect(Collectors.toList());
+        System.out.println(dishNameLengths);
+
+        List<String> uniqueCharacters =
+                words.stream()
+                        .map(w -> w.split(""))
+                        .flatMap(Arrays::stream)
+                        .distinct()
+                        .collect(Collectors.toList());
+        System.out.println(uniqueCharacters);
+
+        int caloriesSum = menu.stream()
+                .mapToInt(Dish::getCalories)
+                .sum();
+        System.out.println(caloriesSum);
+
+        Map<Dish.Type, List<Dish>> dishesByType =
+                menu.stream().collect(Collectors.groupingBy(Dish::getType));
+        System.out.println(dishesByType);
 
     }
 }
