@@ -1,6 +1,6 @@
 package com.syoki.java.thread;
 
-public class TestJoin {
+public class JoinTest {
 
     public static int a = 0;
 

@@ -1,6 +1,6 @@
 package com.syoki.java.thread;
 
-public class TestThreadLocal {
+public class ThreadLocalTest {
 
     private static final ThreadLocal<Integer> value = new ThreadLocal<Integer>() {
         @Override
